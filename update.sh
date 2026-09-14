@@ -75,7 +75,7 @@ then
     exit
 fi
     check_awnser
-    if [ $answer == "0"]; then
+    if [ $answer == "0" ]; then
         run_tmux_detached=1
     else
         run_tmux_detached=0
