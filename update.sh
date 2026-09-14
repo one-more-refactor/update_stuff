@@ -47,9 +47,9 @@ fi
 function check_awnser {
     #Convert awnser to lower case
     awnser=${awnser,,}
-    if [[ "$awnser" == "y" || "$awnser" == "yes" || "$awnser" == "yeah" ]]; then
+    if [ "$awnser" == "y" ] || [ "$awnser" == "yes" ] || [ "$awnser" == "yeah" ]; then
         return true
-    elif [[ "$awnser" == "n" || "$awnser" == "no" || "$awnser" == "nah" || "$awnser" == "" ]]; then
+    elif [ "$awnser" == "n" ] || [ "$awnser" == "no" ] || [ "$awnser" == "nah" ] || [ "$awnser" == "" ]; then
         return false
     else
         read -p "Invalid awnser please enter y/n: " awnser
