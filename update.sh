@@ -12,7 +12,6 @@ ask_attach_tmux_timeout="5"
 
 #in development
 payload="apt update && apt full-upgrade -y && apt autoclean -y && apt autoremove -y"
-$tmux_session_timeout="30"
 run_tmux_detached=true
 ntfy_link="https://ntfy.sh/your_topic"
 
