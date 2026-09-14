@@ -107,7 +107,7 @@ if [ check_tmux_session = true ]; then
         echo "Exiting script"
         exit
     fi
-
+fi
 #Ask whether to attach to tmux session skip when allrady set
 if [ run_tmux_detached == "" ]; then
     read -t $ask_attach_tmux_timeout -n 'Attach to tmux session? (y/n) ' answer
