@@ -122,9 +122,8 @@ fi
 
 
 if [ run_tmux_detached == 1 ]; then
-    show_output =" && read -t $tmux_session_timeout -n 'Press any key to continue...' answer" && ""
+    show_output =" && read -t $tmux_session_timeout -n 'Press any key to continue...' && "
 fi
-
 #Create tmux session
 tmux new-session -d -s "$tmux_session_name" "$payload $show_output && exit"
 
