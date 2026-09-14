@@ -124,7 +124,7 @@ tmux new-session -d -s "$tmux_session_name" "$payload $show_output && exit"
 
 #Attach to tmux session
 check_awnser
-if awnser == "0"; then
+if $awnser == "0"; then
     if [ check_tmux_session = 0 ]; then
             tmux attach-session -t $tmux_session_name
     else
