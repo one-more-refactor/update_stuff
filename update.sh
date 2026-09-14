@@ -3,8 +3,8 @@
 #  Variables
 
 tmux_session_name="update_debian"
-tmux_session_timeout=10
-ask_attach_tmux_timeout=5
+tmux_session_timeout="10"
+ask_attach_tmux_timeout="5"
 
 
 
@@ -69,10 +69,6 @@ if [ "$EUID" -ne 0 ]; then
     echo "please run this script as root or with sudo"
     exit
 fi
-
-#Create new tmux session and run payload
-tmux new-session -d -s "$tmux_session_name" "$payload && exit"
-
 #Check dependencies
 if command -v tmux &> /dev/null;
 then
@@ -85,7 +81,8 @@ fi
     else
         run_tmux_detached=true
     fi
-
+#Create new tmux session and run payload
+tmux new-session -d -s "$tmux_session_name" "$payload && exit"
 
 #Fuction for checking for allrady running tmux sessions by name
 function check_tmux_session {
