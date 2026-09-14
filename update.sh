@@ -74,12 +74,6 @@ then
     echo "tmux is required to run this script, please install it and try again"
     exit
 fi
-    check_awnser
-    if [ $answer == "0" ]; then
-        run_tmux_detached=1
-    else
-        run_tmux_detached=0
-    fi
 
 #Fuction for checking for allrady running tmux sessions by name
 function check_tmux_session {
@@ -102,6 +96,18 @@ if [ check_tmux_session = 0 ]; then
         exit
     fi
 fi
+
+
+#    check_awnser
+#    if [ $answer == "0" ]; then
+#        run_tmux_detached=1
+#    else
+#        run_tmux_detached=0
+#    fi
+
+
+
+
 #Ask whether to attach to tmux session skip when allrady set
 if [ run_tmux_detached == "" ]; then
     read -t $ask_attach_tmux_timeout -n 'Attach to tmux session? (y/n) ' answer
