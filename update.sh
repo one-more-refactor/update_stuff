@@ -69,7 +69,7 @@ if [ "$EUID" -ne 0 ]; then
     exit
 fi
 #Check dependencies
-if command -v tmux &> /dev/null;
+if ! command -v tmux &> /dev/null
 then
     echo "tmux is required to run this script, please install it and try again"
     exit
@@ -80,8 +80,6 @@ fi
     else
         run_tmux_detached=true
     fi
-#Create new tmux session and run payload
-tmux new-session -d -s "$tmux_session_name" "$payload && exit"
 
 #Fuction for checking for allrady running tmux sessions by name
 function check_tmux_session {
@@ -122,7 +120,7 @@ if [ run_tmux_detached == false ]; then
 fi
 
 #Create tmux session
-tmux new-session -d -s "$tmux_session_name" "$payload $show_outputo && exit"
+tmux new-session -d -s "$tmux_session_name" "$payload $show_output && exit"
 
 #Attach to tmux session
 check_awnser
