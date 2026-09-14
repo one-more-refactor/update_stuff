@@ -12,7 +12,7 @@ ask_attach_tmux_timeout="5"
 
 #in development
 payload="apt update && apt full-upgrade -y && apt autoclean -y && apt autoremove -y"
-run_tmux_detached=true
+run_tmux_detached=0
 ntfy_link="https://ntfy.sh/your_topic"
 
 
@@ -29,7 +29,7 @@ ntfy_link="https://ntfy.sh/your_topic"
 
 
 #-debug
-#DEBUG = true
+#DEBUG = 0
 #TODO IMPLEMENT DEBUG Mode
 #Define awnser into run_tmux_detached invert cause where 
 
@@ -48,9 +48,9 @@ function check_awnser {
     #Convert awnser to lower case
     awnser=${awnser,,}
     if [ "$awnser" == "y" ] || [ "$awnser" == "yes" ] || [ "$awnser" == "yeah" ]; then
-        return true
+        return 0
     elif [ "$awnser" == "n" ] || [ "$awnser" == "no" ] || [ "$awnser" == "nah" ] || [ "$awnser" == "" ]; then
-        return false
+        return 1
     else
         read -p "Invalid awnser please enter y/n: " awnser
         check_awnser
@@ -75,26 +75,26 @@ then
     exit
 fi
     check_awnser
-    if [ $answer == "true"]; then
-        run_tmux_detached=false
+    if [ $answer == "0"]; then
+        run_tmux_detached=1
     else
-        run_tmux_detached=true
+        run_tmux_detached=0
     fi
 
 #Fuction for checking for allrady running tmux sessions by name
 function check_tmux_session {
     if tmux has-session -t $tmux_session_name 2>/dev/null; then
-        return true
+        return 0
     else
-        return false
+        return 1
     fi
 }
 
-if [ check_tmux_session = true ]; then
+if [ check_tmux_session = 0 ]; then
     echo "tmux session $tmux_session_name already exists"
     read -p "Attach to tmux session? (y/n) " answer
     check_awnser
-    if [[ "$answer" == "true" ]]; then
+    if [[ "$answer" == "0" ]]; then
         tmux attach-session -t $tmux_session_name
         exit
     else
@@ -106,16 +106,16 @@ fi
 if [ run_tmux_detached == "" ]; then
     read -t $ask_attach_tmux_timeout -n 'Attach to tmux session? (y/n) ' answer
     check_awnser
-    if [ "$answer" == true ]; then
-        run_tmux_detached=false
+    if [ "$answer" == 0 ]; then
+        run_tmux_detached=1
     else
-        run_tmux_detached=true
+        run_tmux_detached=0
     fi
 fi
 
 
 
-if [ run_tmux_detached == false ]; then
+if [ run_tmux_detached == 1 ]; then
     show_output =" && read -t $tmux_session_timeout -n 'Press any key to continue...' answer" && ""
 fi
 
@@ -124,8 +124,8 @@ tmux new-session -d -s "$tmux_session_name" "$payload $show_output && exit"
 
 #Attach to tmux session
 check_awnser
-if awnser == "true"; then
-    if [ check_tmux_session = true ]; then
+if awnser == "0"; then
+    if [ check_tmux_session = 0 ]; then
             tmux attach-session -t $tmux_session_name
     else
         echo "fatal error: tmux session $tmux_session_name does not exist"
