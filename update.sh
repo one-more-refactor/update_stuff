@@ -45,12 +45,21 @@ fi
 
 #Check awnser from user
 function check_awnser {
+<<<<<<< HEAD
     #Convert awnser to lower case
     awnser=${awnser,,}
     if [ "$awnser" == "y" ] || [ "$awnser" == "yes" ] || [ "$awnser" == "yeah" ]; then
         return 0
     elif [ "$awnser" == "n" ] || [ "$awnser" == "no" ] || [ "$awnser" == "nah" ] || [ "$awnser" == "" ]; then
         return 1
+=======
+    #Convert awnser to lowercase
+    awnser=${awnser,,}
+    if [ "$awnser" == "y" ] || [ "$awnser" == "yes" ] || [ "$awnser" == "yeah" ]; then
+        awsner = true
+    elif [ "$awnser" == "n" ] || [ "$awnser" == "no" ] || [ "$awnser" == "nah" ] || [ "$awnser" == "" ]; then
+        awsner = false
+>>>>>>> 932949f (init local codebase)
     else
         read -p "Invalid awnser please enter y/n: " awnser
         check_awnser
@@ -89,7 +98,11 @@ if [ check_tmux_session = 0 ]; then
     read -p "Attach to tmux session? (y/n) " answer
     check_awnser
     if [[ "$answer" == "0" ]]; then
+<<<<<<< HEAD
         tmux attach-session -t $tmux_session_name
+=======
+        tmux attach-session -t $tmux_session_name! command -v tmux &> /dev/null
+>>>>>>> 932949f (init local codebase)
         exit
     else
         echo "Exiting script"
@@ -129,8 +142,12 @@ tmux new-session -d -s "$tmux_session_name" "$payload $show_output && exit"
 
 #Attach to tmux session
 check_awnser
+<<<<<<< HEAD
 
 if [ ! $awnser == "" ]; then 
+=======
+if [ $awnser == "0" ]; then
+>>>>>>> 932949f (init local codebase)
     if [ check_tmux_session = 0 ]; then
             tmux attach-session -t $tmux_session_name
     else
