@@ -7,4 +7,6 @@ even ai cant replicate this level of spagheti code
 
 
 ''''
+
 curl -fsSL https://raw.githubusercontent.com/one-more-refactor/update_stuff/main/update.sh
+''''
