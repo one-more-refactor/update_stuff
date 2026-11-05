@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Demo stub: prints realistic-looking apt output with small delays.
+# It changes nothing on the machine that records the demo.
+set -euo pipefail
+
+speed="${DEMO_SPEED:-1}" # >1 = slower
+
+nap() { sleep "$(awk -v s="$1" -v k="$speed" 'BEGIN { printf "%.2f", s * k }')"; }
+say() {
+    printf '%s\n' "$1"
+    nap "${2:-0.08}"
+}
+
+case "$*" in
+    update)
+        say "Hit:1 http://deb.debian.org/debian bookworm InRelease" 0.25
+        say "Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]" 0.3
+        say "Get:3 http://security.debian.org/debian-security bookworm-security InRelease [48.0 kB]" 0.35
+        say "Get:4 http://security.debian.org/debian-security bookworm-security/main amd64 Packages [241 kB]" 0.4
+        say "Fetched 345 kB in 1s (412 kB/s)"
+        say "Reading package lists... Done" 0.3
+        ;;
+    "-y full-upgrade")
+        say "Reading package lists... Done"
+        say "Building dependency tree... Done"
+        say "Reading state information... Done"
+        say "Calculating upgrade... Done" 0.2
+        say "The following packages will be upgraded:"
+        say "  curl libcurl4 libssl3 openssl tzdata" 0.2
+        say "5 upgraded, 0 newly installed, 0 to remove and 0 not upgraded."
+        say "Need to get 4,812 kB of archives." 0.2
+        for pkg in curl libcurl4 libssl3 openssl tzdata; do
+            say "Get: http://deb.debian.org/debian bookworm/main amd64 $pkg" 0.15
+        done
+        for pkg in curl libcurl4 libssl3 openssl tzdata; do
+            say "Preparing to unpack .../$pkg.deb ..." 0.05
+            say "Unpacking $pkg ..." 0.2
+        done
+        for pkg in libssl3 openssl libcurl4 curl tzdata; do
+            say "Setting up $pkg ..." 0.18
+        done
+        say "Processing triggers for libc-bin (2.36-9+deb12u9) ..." 0.3
+        ;;
+    "-y autoremove")
+        say "Reading package lists... Done"
+        say "0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded." 0.2
+        ;;
+    "-y autoclean")
+        say "Reading package lists... Done"
+        say "Del tzdata 2024a-0+deb12u1 [256 kB]" 0.2
+        ;;
+    *) ;;
+esac

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="update_stuff">
+  <title>update_stuff</title>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#0F1420"/>
+  <!-- refresh loop around a prompt: "update this box" -->
+  <path d="M44.2 17.4 A19 19 0 1 0 50.7 28.7" fill="none" stroke="#3DDC97" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M51.6 19.2 L56.4 30.4 L45.6 30.6 Z" fill="#3DDC97" stroke="#3DDC97" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M24 26 L30 32 L24 38" fill="none" stroke="#E8F1EC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M33 39 H41" fill="none" stroke="#3DDC97" stroke-width="4" stroke-linecap="round">
+    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.2s" repeatCount="indefinite"/>
+  </path>
+</svg>
